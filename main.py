@@ -3,7 +3,8 @@ import csv
 import pyautogui
 
 # Esperar 5 segundos para que tengas tiempo de abrir la ventana que contiene los botones
-time.sleep(5)
+print("abra anduin antes de 8 segundos e ignore esta ventana")
+time.sleep(8)
 
 # Abrir el archivo CSV que tiene la orden
 with open('orden.csv', 'r') as archivo:
@@ -12,6 +13,7 @@ with open('orden.csv', 'r') as archivo:
     # Recorrer la columna del archivo CSV y escribir el primer dato encontrado
     for fila in lector_csv:
         orden = fila[0]
+        print(orden)
         break
 
 # Abrir el archivo CSV
@@ -55,5 +57,7 @@ with open('datos.csv', 'r') as archivo:
         time.sleep(2)
 
         #repite el ciclo
-        with open("status.txt", "w") as f:
-            f.write("finish")
+        print('cable ', codigo_cable, ' agregado')
+
+print("El script ha finalizado. Presione Enter para salir.")
+input()
