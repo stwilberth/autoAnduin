@@ -1,20 +1,28 @@
 import time
 import csv
 import pyautogui
+import pyscreeze
 
 # Esperar 5 segundos para que tengas tiempo de abrir la ventana que contiene los botones
-print("abra anduin antes de 8 segundos e ignore esta ventana")
-time.sleep(8)
+print("abra anduin antes de 5 segundos e ignore esta ventana")
+time.sleep(5)
 
 # Abrir el archivo CSV que tiene la orden
-with open('orden.csv', 'r') as archivo:
-    lector_csv = csv.reader(archivo)
 
-    # Recorrer la columna del archivo CSV y escribir el primer dato encontrado
-    for fila in lector_csv:
-        orden = fila[0]
-        print(orden)
-        break
+try:
+    # Código que puede lanzar una excepción
+    with open('orden.csv', 'r') as archivo:
+        lector_csv = csv.reader(archivo)
+        # Recorrer la columna del archivo CSV y escribir el primer dato encontrado
+        for fila in lector_csv:
+            orden = fila[0]
+            print(orden)
+            time.sleep(5)
+            break
+except Exception as e:
+    # Capturamos la excepción y la mostramos
+    print("Error: ", e)
+    input()
 
 # Abrir el archivo CSV
 with open('datos.csv', 'r') as archivo:
