@@ -1,11 +1,10 @@
 import time
 import csv
 import pyautogui
-import pyscreeze
 import sys
 import os
 
-sleep_time = 1
+sleep_time = int(input("Digete en segundos el tiempo de espera en cada iteracion: "))
 
 # verificar coordenadas
 # si están procedo automatizacion, tienen que ser mayor que cero e igual a 3 creo
@@ -17,7 +16,7 @@ def pedirCoordenadas():
         coordenadas = tuple()
 
         for i in range(3):
-            contador_regresivo(5)
+            contador_regresivo(7)
             posicion_clic = pyautogui.position()
             coordenadas += (posicion_clic,)
             print(f"Se agregó {len(coordenadas)} coordenadas: {posicion_clic}")
@@ -101,8 +100,7 @@ def data_csv(coordenadas, orden):
                 time.sleep(sleep_time)
                 
                 #escribir el codigo del cable
-                print(codigo_cable)
-                pyautogui.typewrite(codigo_cable)
+                pyautogui.write(codigo_cable)
                 pyautogui.press('enter')
                 time.sleep(sleep_time)
 
