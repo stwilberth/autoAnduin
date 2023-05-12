@@ -91,48 +91,38 @@ def data_csv(coordenadas, orden):
                 #login
                 x, y = coordenadas[0]
                 pyautogui.click(x, y)
-                print('logueando')
                 contador_regresivo(sleep_time)
                 
                 #escribir el codigo del cable
                 pyautogui.write(codigo_cable)
                 pyautogui.press('enter')
-                print('Escribiendo el codigo del cable: ', codigo_cable)
                 contador_regresivo(sleep_time)
 
                 #da clic al boton de linkear
                 x, y = coordenadas[1]
                 pyautogui.click(x, y)
-                print('Clic boton linkear')
                 contador_regresivo(sleep_time)
 
                 #introduce el numero de orden
                 pyautogui.typewrite(orden)
                 pyautogui.press('enter')
-                print('Escribiendo el numero de orden: ', orden)
                 contador_regresivo(sleep_time)
 
                 #da clic al boton cuando pregunsta si desea linkear
                 pyautogui.press('enter')
-                print('Presionando enter')
                 contador_regresivo(sleep_time)
 
                 #enter a la ventana emergente de que se agrego correctamente
                 pyautogui.press('enter')
-                print('Presionando otra vez enter')
                 contador_regresivo(sleep_time)
 
                 #da clic al boton logof
                 x, y = coordenadas[2]
                 pyautogui.click(x, y)
-                print('Clic boton logof')
                 contador_regresivo(sleep_time)
 
                 #repite el ciclo
-                print('cable linkeado')
-                print('...')
-                print('...')
-                print('...')
+                print(codigo_cable)
 
         
         except Exception as e:
@@ -148,7 +138,7 @@ def start():
         coordenadas = pedirCoordenadas()
 
     orden = pedirOrden()
-    
+
     while True:
         print("Empezando automatizacion, de clic en la ventana de anduin")
         contador_regresivo(10)
@@ -161,4 +151,3 @@ def start():
 
 # iniciar el programa
 start()
-    
