@@ -3,8 +3,17 @@ import csv
 import pyautogui
 import sys
 import os
-from colorama import Fore, Style
+from colorama import init, Fore, Style
 
+
+# falta validar que el numero de orden no tenga espacios en blanco ni este en blanco
+
+# def validar_orden(orden):
+#     if len(orden) == 0:
+#         print(Fore.RED + "Debe ingresar un orden valido. Inténtelo de nuevo." + Fore.RESET)
+#         return False
+#     else:
+init()
 print()
 while True:
     try:
@@ -29,6 +38,10 @@ def pedirCoordenadas():
     try:
         coordenadas = tuple()
 
+        print(Fore.MAGENTA + "Obtendremos las posiciones de los botones, loguin, linkear y logof en ese respectivo orden" + Fore.RESET)
+        print("No necesita dar click en el boton para obtener la posicion, solo manterner el puntero encima del boton mientras termina el conteo regresivo")
+        print()
+
         for i in range(3):
             tiempo = 8
             input(f"Presione enter para obtener la posicion del mouse, tiene {str(tiempo)} segundos para posicionar el mouse")
@@ -39,7 +52,8 @@ def pedirCoordenadas():
             input("Enter para continuar")
 
         escribir_coordenadas_csv('coordenadas.csv', coordenadas)
-        input("solicitud de coordenadas finalizada, presione enter para continuar")
+        input(Fore.GREEN + "Ingreso de coordenadas finalizada, presione enter para continuar" + Fore.RESET)
+        print()
         return coordenadas
     
     except Exception as e:
