@@ -4,8 +4,15 @@ import pyautogui
 import sys
 import os
 from colorama import init, Fore, Style
+import getpass
 
-sleep_time = int(input("Digete el tiempo de espera en segundo entre cada paso: "))
+print()
+while True:
+    try:
+        sleep_time = int(input("Digete el tiempo de espera en segundos entre cada paso: "))
+        break
+    except ValueError:
+        print(Fore.RED + "Debe ingresar un número entero. Inténtelo de nuevo." + Fore.RESET)
 
 def contador_regresivo(tiempo):
     inicio = time.time()
@@ -67,7 +74,7 @@ def pedirOrden():
             if not orden:
                 continue
             
-            respuesta = input("¿Es correcto? (s/n):")
+            respuesta = input(Fore.YELLOW + "¿Es correcto? (s/n):" + Fore.RESET)
             if respuesta.lower() == 's':
                 return orden
             else:
@@ -80,29 +87,43 @@ def pedirOrden():
         sys.exit(1)
 
 def scan_codes():
-    num_codes = int(input("Ingrese la cantidad de códigos a escanear: "))
+    while True:
+        try:
+            print()
+            num_codes = int(input("Ingrese la cantidad de cables que desea escanear: "))
+            if num_codes < 1:
+                print()
+                print(Fore.RED + "La cantidad de cables debe ser mayor a cero" + Style.RESET_ALL)
+                continue
+            break
+        except ValueError:
+            print(Fore.RED + "Debe ingresar un número entero. Inténtelo de nuevo." + Fore.RESET)
+    print()
     codes = set()
     count = 0
+    print(Fore.GREEN + "Escanee los cables" + Style.RESET_ALL)
     while len(codes) < num_codes:
         while True:
-            code = input("Ingrese el código a escanear: ")
+            code = input()
             if code.strip() == "":
-                print("No puede estar vacío")
+                print(Fore.RED + "No puede estar vacío" + Style.RESET_ALL)
             elif " " in code:
-                print("No puede contener espacios en blanco")
+                print(Fore.RED + "No puede contener espacios en blanco" + Style.RESET_ALL)
             else:
                 break
         if code not in codes:
             codes.add(code)
             count += 1
-            print(f"Escaneado código {count}/{num_codes}")
+            print(Fore.CYAN + f"Escaneando {count}/{num_codes}" + Style.RESET_ALL)
         else:
-            print("El código ya está escaneado")
+            print(Fore.YELLOW + "El cable ya está escaneado" + Style.RESET_ALL)
+
     sorted_codes = sorted(codes)
-    print("Códigos escaneados:")
+    print()
+    print(Fore.GREEN + "Cables escaneados:" + Fore.RESET)
     for code in sorted_codes:
-        print(code)
-    
+        print(Fore.MAGENTA + code + Fore.RESET)
+    print()
     return sorted_codes
 
 # Abrir el archivo CSV
@@ -145,7 +166,7 @@ def automation(coordenadas, orden, sort_cables):
 
             #repite el ciclo
             numero = i + 1
-            print(f'Escaneado {numero}/{len(sort_cables)}: {codigo_cable}')
+            print(Fore.CYAN + f'Cable {numero}/{len(sort_cables)} linkeado'+ Fore.RESET)
     
     except Exception as e:
         # Capturamos la excepción y la mostramos
@@ -163,24 +184,36 @@ def start():
 
     while True:
         cables = scan_codes()
-        init()
-        print(Fore.YELLOW + 'Cierre e inicie sesion en anduin antes de continuar' + Fore.RESET)
-        input('En 10 segundos iniciará la automatizacion, Presione enter para continuar')
-        print(Fore.YELLOW + 'Asegurese de posicionarse en la ventana de Anduin' + Fore.RESET)
-        contador_regresivo(10)
+
+        print(Fore.YELLOW + 'Cierre e inicie sesion en anduin' + Fore.RESET)
+        print()
+        input("Presione Enter para continuar")
+        print()
+        print(Fore.YELLOW + 'En 20 segundos iniciará la automatizacion' + Fore.RESET)
+        print()
+        input("Presione Enter para empezar el linkeo")
+        print()
+        print(Fore.YELLOW + "*************************************************************")
+        print(Fore.YELLOW + "#                                                           #")
+        print(Fore.YELLOW + "#               Dirijase a la ventana de Anduin             #")
+        print(Fore.YELLOW + "#                                                           #")
+        print(Fore.YELLOW + "*************************************************************")
+        print(Style.RESET_ALL)  # Resetear los estilos de color
+
+        contador_regresivo(20)
 
         automation(coordenadas, orden, cables)
         
-        init()  # Inicializar colorama
-
-        print(Fore.GREEN + "##############################")
-        print(Fore.GREEN + "#                            #")
-        print(Fore.GREEN + "#       TAREA FINALIZADA     #")
-        print(Fore.GREEN + "#                            #")
-        print(Fore.GREEN + "##############################")
+        print()
+        print(Fore.GREEN + "#######################################################")
+        print(Fore.GREEN + "#                                                     #")
+        print(Fore.GREEN + "#                 ¡¡¡ POLLO COMPLETADO  !!!           #")
+        print(Fore.GREEN + "#                                                     #")
+        print(Fore.GREEN + "#######################################################")
         print(Style.RESET_ALL)  # Resetear los estilos de color
-        input("Presione Enter para INGRESAR otra lista de cables")
-
+        input("Presione Enter para escanear más cables")
+        print()
 
 # iniciar el programa
+
 start()
