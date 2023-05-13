@@ -3,13 +3,15 @@ import csv
 import pyautogui
 import sys
 import os
-from colorama import init, Fore, Style
-import getpass
+from colorama import Fore, Style
 
 print()
 while True:
     try:
         sleep_time = int(input("Digete el tiempo de espera en segundos entre cada paso: "))
+        if sleep_time < 2 :
+            print(Fore.RED + "Debe ingresar un número mayor a 2. Inténtelo de nuevo." + Fore.RESET)
+            continue
         break
     except ValueError:
         print(Fore.RED + "Debe ingresar un número entero. Inténtelo de nuevo." + Fore.RESET)
